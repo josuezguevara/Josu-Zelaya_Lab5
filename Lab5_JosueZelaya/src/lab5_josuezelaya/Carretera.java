@@ -9,13 +9,6 @@ package lab5_josuezelaya;
  *
  * @author usuario
  */
-public class Lab5_JosueZelaya {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+class Carretera {
     
 }
