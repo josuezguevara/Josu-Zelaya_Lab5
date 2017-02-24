@@ -5,6 +5,14 @@
  */
 package lab5_josuezelaya;
 
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultTreeModel;
+
 /**
  *
  * @author usuario
@@ -16,7 +24,7 @@ public class Ventana extends javax.swing.JFrame {
      */
     public Ventana() {
         initComponents();
-         this.setExtendedState(MAXIMIZED_BOTH);//cuandro abrimos sale maximizada
+        this.setExtendedState(MAXIMIZED_BOTH);//cuandro abrimos sale maximizada
     }
 
     /**
@@ -46,18 +54,51 @@ public class Ventana extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         cb_categoria_restaurante = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cb_calificacion = new javax.swing.JComboBox<>();
         panel_cancha = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         cb_categoria_cancha = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         cb_estado = new javax.swing.JComboBox<>();
         panel_casa = new javax.swing.JPanel();
+        boton_guardar_lugar = new javax.swing.JButton();
+        jd_carretera = new javax.swing.JDialog();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        tf_numero = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        tf_distancia = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        cb_lugar_inicio = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        cb_lugar_final = new javax.swing.JComboBox<>();
+        boton_guardar_carretera = new javax.swing.JButton();
+        jd_listar_jtable = new javax.swing.JDialog();
+        jLabel16 = new javax.swing.JLabel();
+        cb_opcion_jtable = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla1 = new javax.swing.JTable();
+        menu_popup = new javax.swing.JPopupMenu();
+        opcion_eliminar = new javax.swing.JMenuItem();
+        jd_listar = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jlist = new javax.swing.JList<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jm_lugar = new javax.swing.JMenuItem();
         jm_carretera = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jm_jtable = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+
+        jd_lugar.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                jd_lugarWindowActivated(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Lugar");
@@ -72,6 +113,12 @@ public class Ventana extends javax.swing.JFrame {
 
         jLabel4.setText("Nivel de Seguridad ");
 
+        tf_nivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_nivelActionPerformed(evt);
+            }
+        });
+
         jLabel5.setText("Carreteras de Entrada");
 
         jLabel6.setText("Carretera de Salida");
@@ -82,7 +129,7 @@ public class Ventana extends javax.swing.JFrame {
 
         jLabel8.setText("Calificacion");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", " " }));
+        cb_calificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
 
         javax.swing.GroupLayout panel_restauranteLayout = new javax.swing.GroupLayout(panel_restaurante);
         panel_restaurante.setLayout(panel_restauranteLayout);
@@ -95,7 +142,7 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addGap(37, 37, 37)
                 .addGroup(panel_restauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_calificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_categoria_restaurante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(225, Short.MAX_VALUE))
         );
@@ -109,8 +156,8 @@ public class Ventana extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(panel_restauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(190, Short.MAX_VALUE))
+                    .addComponent(cb_calificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         tab_principal.addTab("Restaurantes", panel_restaurante);
@@ -149,7 +196,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(panel_canchaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(cb_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         tab_principal.addTab("Cancha", panel_cancha);
@@ -162,47 +209,59 @@ public class Ventana extends javax.swing.JFrame {
         );
         panel_casaLayout.setVerticalGroup(
             panel_casaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 328, Short.MAX_VALUE)
+            .addGap(0, 235, Short.MAX_VALUE)
         );
 
         tab_principal.addTab("Casa", panel_casa);
+
+        boton_guardar_lugar.setText("Guardar");
+        boton_guardar_lugar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boton_guardar_lugarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jd_lugarLayout = new javax.swing.GroupLayout(jd_lugar.getContentPane());
         jd_lugar.getContentPane().setLayout(jd_lugarLayout);
         jd_lugarLayout.setHorizontalGroup(
             jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_lugarLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jd_lugarLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_lugarLayout.createSequentialGroup()
                             .addComponent(jLabel3)
-                            .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_lugarLayout.createSequentialGroup()
-                                    .addGap(61, 61, 61)
-                                    .addComponent(jScrollPane1))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_lugarLayout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_lugarLayout.createSequentialGroup()
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tf_nivel, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(cb_carretera_salida, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jd_lugarLayout.createSequentialGroup()
-                                    .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel6))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cb_carretera_entrada, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(69, 69, 69)
-                        .addComponent(tab_principal, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addComponent(jScrollPane1))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_lugarLayout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(18, 18, 18)
+                            .addComponent(tf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jd_lugarLayout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addComponent(jLabel1)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                        .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jd_lugarLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cb_carretera_entrada, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cb_carretera_salida, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jd_lugarLayout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(tf_nivel, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addComponent(tab_principal, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
+            .addGroup(jd_lugarLayout.createSequentialGroup()
+                .addGap(270, 270, 270)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_lugarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(boton_guardar_lugar, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(120, 120, 120))
         );
         jd_lugarLayout.setVerticalGroup(
             jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,26 +272,201 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jd_lugarLayout.createSequentialGroup()
                         .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
+                            .addGroup(jd_lugarLayout.createSequentialGroup()
+                                .addGap(76, 76, 76)
+                                .addComponent(jLabel3))
+                            .addGroup(jd_lugarLayout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(tf_nivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(44, 44, 44)
+                        .addGap(40, 40, 40)
                         .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(cb_carretera_entrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(cb_carretera_salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(tab_principal, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addGap(37, 37, 37))
+                    .addGroup(jd_lugarLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(tab_principal, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)))
+                .addGroup(jd_lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(cb_carretera_salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(boton_guardar_lugar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
+        );
+
+        jd_carretera.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                jd_carreteraWindowActivated(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel11.setText("Carretera");
+
+        jLabel12.setText("Numero");
+
+        jLabel13.setText("Distancia en kilometros");
+
+        jLabel14.setText("Lugar de Inicio");
+
+        jLabel15.setText("Lugar de Final ");
+
+        boton_guardar_carretera.setText("Guardar");
+        boton_guardar_carretera.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                boton_guardar_carreteraMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_carreteraLayout = new javax.swing.GroupLayout(jd_carretera.getContentPane());
+        jd_carretera.getContentPane().setLayout(jd_carreteraLayout);
+        jd_carreteraLayout.setHorizontalGroup(
+            jd_carreteraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_carreteraLayout.createSequentialGroup()
+                .addGroup(jd_carreteraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_carreteraLayout.createSequentialGroup()
+                        .addGap(248, 248, 248)
+                        .addComponent(jLabel11))
+                    .addGroup(jd_carreteraLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jd_carreteraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tf_numero, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jd_carreteraLayout.createSequentialGroup()
+                                .addGroup(jd_carreteraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15))
+                                .addGroup(jd_carreteraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jd_carreteraLayout.createSequentialGroup()
+                                        .addGap(47, 47, 47)
+                                        .addComponent(tf_distancia, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_carreteraLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cb_lugar_final, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cb_lugar_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(301, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_carreteraLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(boton_guardar_carretera, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
+        );
+        jd_carreteraLayout.setVerticalGroup(
+            jd_carreteraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_carreteraLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel11)
+                .addGap(54, 54, 54)
+                .addGroup(jd_carreteraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_numero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jd_carreteraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(tf_distancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(jd_carreteraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_lugar_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(jd_carreteraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(cb_lugar_final, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(boton_guardar_carretera, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
+
+        jLabel16.setText("Opcion");
+
+        cb_opcion_jtable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Restaurante", "Cancha", "Carretera" }));
+        cb_opcion_jtable.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_opcion_jtableItemStateChanged(evt);
+            }
+        });
+
+        tabla1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabla1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tabla1);
+
+        javax.swing.GroupLayout jd_listar_jtableLayout = new javax.swing.GroupLayout(jd_listar_jtable.getContentPane());
+        jd_listar_jtable.getContentPane().setLayout(jd_listar_jtableLayout);
+        jd_listar_jtableLayout.setHorizontalGroup(
+            jd_listar_jtableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_listar_jtableLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel16)
+                .addGap(44, 44, 44)
+                .addComponent(cb_opcion_jtable, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(377, Short.MAX_VALUE))
+            .addGroup(jd_listar_jtableLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+        );
+        jd_listar_jtableLayout.setVerticalGroup(
+            jd_listar_jtableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_listar_jtableLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jd_listar_jtableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(cb_opcion_jtable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(92, 92, 92)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(106, Short.MAX_VALUE))
+        );
+
+        opcion_eliminar.setText("Eliminar");
+        menu_popup.add(opcion_eliminar);
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Categorias");
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane3.setViewportView(jTree1);
+
+        jScrollPane4.setViewportView(jlist);
+
+        javax.swing.GroupLayout jd_listarLayout = new javax.swing.GroupLayout(jd_listar.getContentPane());
+        jd_listar.getContentPane().setLayout(jd_listarLayout);
+        jd_listarLayout.setHorizontalGroup(
+            jd_listarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_listarLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62))
+        );
+        jd_listarLayout.setVerticalGroup(
+            jd_listarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_listarLayout.createSequentialGroup()
+                .addContainerGap(97, Short.MAX_VALUE)
+                .addGroup(jd_listarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_listarLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_listarLayout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80))))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -242,12 +476,42 @@ public class Ventana extends javax.swing.JFrame {
         jMenu3.setText("Agregar");
 
         jm_lugar.setText("Lugar");
+        jm_lugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_lugarActionPerformed(evt);
+            }
+        });
         jMenu3.add(jm_lugar);
 
         jm_carretera.setText("Carretera");
+        jm_carretera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_carreteraActionPerformed(evt);
+            }
+        });
         jMenu3.add(jm_carretera);
 
         jMenu1.add(jMenu3);
+
+        jMenu2.setText("Listar");
+
+        jm_jtable.setText("JTable");
+        jm_jtable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_jtableActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jm_jtable);
+
+        jMenuItem1.setText("JList y JTree");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenu1.add(jMenu2);
 
         jMenuBar1.add(jMenu1);
 
@@ -266,6 +530,227 @@ public class Ventana extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jm_lugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_lugarActionPerformed
+        // TODO add your handling code here:
+        this.jd_lugar.setModal(true);
+        this.jd_lugar.pack();
+        this.jd_lugar.setLocationRelativeTo(this);
+        this.jd_lugar.setVisible(true);
+
+    }//GEN-LAST:event_jm_lugarActionPerformed
+
+    private void boton_guardar_lugarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_guardar_lugarMouseClicked
+        // boton agregar lugar
+        String nombre;
+        String direccion, categoria_restaurante, categoria_cancha, estado;
+        int nivel_seguridad, calificacion;
+        Carretera carretera_entrada;
+        Carretera carretera_salida;
+
+        nombre = tf_nombre.getText();
+        direccion = ta_direccion.getText();
+        nivel_seguridad = Integer.parseInt(tf_nivel.getText().toString());
+        carretera_entrada = (Carretera) cb_carretera_entrada.getSelectedItem();
+        carretera_salida = (Carretera) cb_carretera_salida.getSelectedItem();
+        if (this.tab_principal.getSelectedIndex() == 0) {
+            // esta en el panel restaurante
+            categoria_restaurante = cb_categoria_restaurante.getSelectedItem().toString();
+            calificacion = Integer.parseInt(cb_calificacion.getSelectedItem().toString());
+            lugar.add(new Restaurante(categoria_restaurante, calificacion, nombre, direccion, nivel_seguridad, carretera_entrada, carretera_salida));
+            JOptionPane.showMessageDialog(this, "Se guardo correctamente");
+        } else if (tab_principal.getSelectedIndex() == 1) {
+            //esta en la canha
+            categoria_cancha = cb_categoria_cancha.getSelectedItem().toString();
+            estado = (String) cb_estado.getSelectedItem();
+            lugar.add(new Cancha(categoria_cancha, estado, nombre, direccion, nivel_seguridad, carretera_entrada, carretera_salida));
+            JOptionPane.showMessageDialog(this, "Se guardo correctamente");
+        } else if (tab_principal.getSelectedIndex() == 2) {
+            lugar.add(new Casa(nombre, direccion, nivel_seguridad, carretera_entrada, carretera_salida));
+            JOptionPane.showMessageDialog(this, "Se guardo correctamente");
+        }
+        
+//resetear
+        tf_nombre.setText("");
+        ta_direccion.setText("");
+        tf_nivel.setText("");
+        cb_calificacion.setSelectedIndex(-1);
+        cb_carretera_entrada.setSelectedIndex(-1);
+        cb_carretera_salida.setSelectedIndex(-1);
+        cb_categoria_cancha.setSelectedIndex(-1);
+        cb_categoria_restaurante.setSelectedIndex(-1);
+        cb_estado.setSelectedIndex(-1);
+
+    }//GEN-LAST:event_boton_guardar_lugarMouseClicked
+
+    private void tf_nivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nivelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_nivelActionPerformed
+
+    private void jm_carreteraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_carreteraActionPerformed
+        // TODO add your handling code here:
+        this.jd_carretera.setModal(true);
+        this.jd_carretera.pack();
+        this.jd_carretera.setLocationRelativeTo(this);
+        this.jd_carretera.setVisible(true);
+    }//GEN-LAST:event_jm_carreteraActionPerformed
+
+    private void boton_guardar_carreteraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boton_guardar_carreteraMouseClicked
+        // boton guardar carretera
+        int numero;
+        double kilometros;
+        Lugar lugar_inicio;
+        Lugar lugar_final;
+        numero = Integer.parseInt(tf_numero.getText());
+        kilometros = Double.parseDouble(tf_distancia.getText());
+        lugar_inicio = (Lugar) cb_lugar_inicio.getSelectedItem();
+        lugar_final = (Lugar) cb_lugar_final.getSelectedItem();
+        carretera.add(new Carretera(numero, kilometros, lugar_inicio, lugar_final));
+        JOptionPane.showMessageDialog(this, "Se agrego exitosamente");
+         
+        //resetear
+        tf_numero.setText("");
+        tf_distancia.setText("");
+        cb_lugar_inicio.setSelectedIndex(-1);
+        cb_lugar_final.setSelectedIndex(-1);
+    }//GEN-LAST:event_boton_guardar_carreteraMouseClicked
+
+    private void jd_lugarWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_lugarWindowActivated
+        // TODO add your handling code here:
+        if (jd_lugar.isActive()) {
+            DefaultComboBoxModel modelo
+                    = new DefaultComboBoxModel();
+            for (Object temp : carretera) {
+                modelo.addElement(temp);
+            }
+            cb_carretera_entrada.setModel(modelo);
+            cb_carretera_salida.setModel(modelo);
+        }
+    }//GEN-LAST:event_jd_lugarWindowActivated
+
+    private void jd_carreteraWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jd_carreteraWindowActivated
+        // TODO add your handling code here:
+        if (jd_carretera.isActive()) {
+            DefaultComboBoxModel modelo
+                    = new DefaultComboBoxModel();
+            for (Object temp : lugar) {
+                modelo.addElement(temp);
+            }
+            cb_lugar_inicio.setModel(modelo);
+            cb_lugar_final.setModel(modelo);
+        }
+    }//GEN-LAST:event_jd_carreteraWindowActivated
+
+    private void jm_jtableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_jtableActionPerformed
+        // TODO add your handling code here:
+        this.jd_listar_jtable.setModal(true);
+        this.jd_listar_jtable.pack();
+        this.jd_listar_jtable.setLocationRelativeTo(this);
+        this.jd_listar_jtable.setVisible(true);
+
+    }//GEN-LAST:event_jm_jtableActionPerformed
+
+    private void cb_opcion_jtableItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_opcion_jtableItemStateChanged
+        // TODO add your handling code here:
+        //lo seleccione y lo meto en una tabla
+        if (evt.getStateChange() == 2) {//van a ver 2 eventos
+            if (cb_opcion_jtable.getSelectedItem().toString().equals("Restaurante")) {
+                DefaultTableModel modelo
+                        = new DefaultTableModel();
+                modelo.addColumn("Nombre");
+                modelo.addColumn("Direccion");
+                modelo.addColumn("Nivel Seguridad");
+                modelo.addColumn("Categoria");
+                modelo.addColumn("Calificacion");
+
+                for (int i = 0; i < lugar.size(); i++) {
+                    Restaurante s = (Restaurante) lugar.get(i);
+                    if (s instanceof Restaurante) {
+                        Object[] newrow = {
+                            s.getNombre(),
+                            s.getDirreccion(),
+                            s.getNivel_seguridad(),
+                            s.getCategoria(),
+                            s.getCalificacion()
+                        };
+                        modelo.addRow(newrow);
+                    }
+
+                };
+
+                tabla1.setModel(modelo);
+
+            }//fin de Restaurante
+
+            if (cb_opcion_jtable.getSelectedItem().toString().equals("Cancha")) {
+
+                DefaultTableModel modelo
+                        = new DefaultTableModel();
+                modelo.addColumn("Nombre");
+                modelo.addColumn("Direccion");
+                modelo.addColumn("Nivel Seguridad");
+                modelo.addColumn("Categoria");
+                modelo.addColumn("Estado");
+
+                for (int i = 0; i < lugar.size(); i++) {
+                    Cancha s = (Cancha) lugar.get(i);
+                    if (s instanceof Cancha) {
+                        Object[] newrow = {
+                            s.getNombre(),
+                            s.getDirreccion(),
+                            s.getNivel_seguridad(),
+                            s.getCategoria(),
+                            s.getEstado()
+                        };
+                        modelo.addRow(newrow);
+                    }
+
+                };
+
+                tabla1.setModel(modelo);
+
+            }//fin del if
+
+            if (cb_opcion_jtable.getSelectedItem().toString().equals("Carretera")) {
+
+                DefaultTableModel modelo
+                        = new DefaultTableModel();
+                modelo.addColumn("Numero");
+                modelo.addColumn("Kilometros");
+
+                for (int i = 0; i < carretera.size(); i++) {
+                    Carretera s = (Carretera) carretera.get(i);
+                    if (s instanceof Carretera) {
+                        Object[] newrow = {
+                            s.getNumero(),
+                            s.getKilometros(),};
+                        modelo.addRow(newrow);
+                    }
+
+                };
+
+                tabla1.setModel(modelo);
+
+            }//fin de la Carretera
+        }
+    }//GEN-LAST:event_cb_opcion_jtableItemStateChanged
+
+    private void tabla1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla1MouseClicked
+        // TODO add your handling code here:
+        if (evt.isMetaDown()){
+            menu_popup.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_tabla1MouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        this.jd_listar.setModal(true);
+        this.jd_listar.pack();
+        this.jd_listar.setLocationRelativeTo(this);
+        this.jd_listar.setVisible(true);
+
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,14 +788,25 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton boton_guardar_carretera;
+    private javax.swing.JButton boton_guardar_lugar;
+    private javax.swing.JComboBox<String> cb_calificacion;
     private javax.swing.JComboBox<String> cb_carretera_entrada;
     private javax.swing.JComboBox<String> cb_carretera_salida;
     private javax.swing.JComboBox<String> cb_categoria_cancha;
     private javax.swing.JComboBox<String> cb_categoria_restaurante;
     private javax.swing.JComboBox<String> cb_estado;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cb_lugar_final;
+    private javax.swing.JComboBox<String> cb_lugar_inicio;
+    private javax.swing.JComboBox<String> cb_opcion_jtable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -320,18 +816,36 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTree jTree1;
+    private javax.swing.JDialog jd_carretera;
+    private javax.swing.JDialog jd_listar;
+    private javax.swing.JDialog jd_listar_jtable;
     private javax.swing.JDialog jd_lugar;
+    private javax.swing.JList<String> jlist;
     private javax.swing.JMenuItem jm_carretera;
+    private javax.swing.JMenuItem jm_jtable;
     private javax.swing.JMenuItem jm_lugar;
+    private javax.swing.JPopupMenu menu_popup;
+    private javax.swing.JMenuItem opcion_eliminar;
     private javax.swing.JPanel panel_cancha;
     private javax.swing.JPanel panel_casa;
     private javax.swing.JPanel panel_restaurante;
     private javax.swing.JTextArea ta_direccion;
     private javax.swing.JTabbedPane tab_principal;
+    private javax.swing.JTable tabla1;
+    private javax.swing.JTextField tf_distancia;
     private javax.swing.JTextField tf_nivel;
     private javax.swing.JTextField tf_nombre;
+    private javax.swing.JTextField tf_numero;
     // End of variables declaration//GEN-END:variables
+ArrayList lugar = new ArrayList();
+    ArrayList carretera = new ArrayList();
 }

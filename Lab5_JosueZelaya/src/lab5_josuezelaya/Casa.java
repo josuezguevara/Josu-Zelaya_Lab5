@@ -20,6 +20,11 @@ public class Casa extends Lugar{
         super(nombre, dirreccion, nivel_seguridad, carretera_entrada, carretera_salida);
     }
 
+    @Override
+    public String toString() {
+        return super.getNombre();
+    }
+
    
     
 }
