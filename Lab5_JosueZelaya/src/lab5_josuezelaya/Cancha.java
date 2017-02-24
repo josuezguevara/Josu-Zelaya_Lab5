@@ -9,18 +9,18 @@ package lab5_josuezelaya;
  *
  * @author usuario
  */
-public class Restaurante extends Lugar{
+public class Cancha extends Lugar{
     private String categoria;
-    private int calificacion;
+    private String estado;
 
-    public Restaurante() {
+    public Cancha() {
         super();
     }
 
-    public Restaurante(String categoria, int calificacion, String nombre, String dirreccion, int nivel_seguridad, Carretera carretera_entrada, Carretera carretera_salida) {
+    public Cancha(String categoria, String estado, String nombre, String dirreccion, int nivel_seguridad, Carretera carretera_entrada, Carretera carretera_salida) {
         super(nombre, dirreccion, nivel_seguridad, carretera_entrada, carretera_salida);
         this.categoria = categoria;
-        this.calificacion = calificacion;
+        this.estado = estado;
     }
 
     public String getCategoria() {
@@ -31,17 +31,17 @@ public class Restaurante extends Lugar{
         this.categoria = categoria;
     }
 
-    public int getCalificacion() {
-        return calificacion;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setCalificacion(int calificacion) {
-        this.calificacion = calificacion;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     @Override
     public String toString() {
-        return "Restaurante{" + "categoria=" + categoria + ", calificacion=" + calificacion + '}';
+        return "Cancha{" + "categoria=" + categoria + ", estado=" + estado + '}';
     }
     
 }
