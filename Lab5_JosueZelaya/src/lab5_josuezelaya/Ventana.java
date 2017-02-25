@@ -683,7 +683,7 @@ public class Ventana extends javax.swing.JFrame {
             }//fin de Restaurante
 
             if (cb_opcion_jtable.getSelectedItem().toString().equals("Cancha")) {
-
+                System.out.println("Entro a la cancha");
                 DefaultTableModel modelo
                         = new DefaultTableModel();
                 modelo.addColumn("Nombre");
